@@ -20,9 +20,9 @@ dpkg=`type -p dpkg-deb`
 dpkg_arch=`dpkg --print-architecture`
 [ "${dpkg_arch}" == "${ARCH}" ] || ARCH=${dpkg_arch}
 
-[ -f "${SRC}/${SRC_NAME}/MPPVERSION" ] || {
-  [ -f "/builds/doctorfree/${SRC_NAME}/MPPVERSION" ] || {
-    echo "$SRC/$SRC_NAME/MPPVERSION does not exist. Exiting."
+[ -f "${SRC}/${SRC_NAME}/VERSION" ] || {
+  [ -f "/builds/doctorfree/${SRC_NAME}/VERSION" ] || {
+    echo "$SRC/$SRC_NAME/VERSION does not exist. Exiting."
     exit 1
   }
   SRC="/builds/doctorfree"
@@ -30,7 +30,7 @@ dpkg_arch=`dpkg --print-architecture`
 # SUDO=
 }
 
-. "${SRC}/${SRC_NAME}/MPPVERSION"
+. "${SRC}/${SRC_NAME}/VERSION"
 PKG_VER=${VERSION}
 PKG_REL=${RELEASE}
 
