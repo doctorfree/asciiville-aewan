@@ -47,7 +47,7 @@ OUT_DIR="dist/${PKG_NAME}_${PKG_VER}"
 cd "${SRC}/${SRC_NAME}"
 
 # Install required development environment tools
-${SUDO} apt install autotools-dev autoconf libtool build-essential
+${SUDO} apt install autotools-dev autoconf libtool build-essential libncurses-dev
 
 # Build aewan
 if [ -x build ]
