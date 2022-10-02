@@ -7,7 +7,7 @@ This release of asciiville-aewan adds support for:
 * Installation as a separate standalone package on multiple platforms
 * Create packaging for Arch Linux, Fedora, Ubuntu, and Raspberry Pi OS
 * Integrated features and customizations from Asciiville
-* Add pre-trained support vector machine (SVM) models to release packages
+* Ported to Arch Linux
 
 ## Installation
 
@@ -41,7 +41,7 @@ sudo yum localinstall ./asciiville-aewan_1.0.0-1.fc36.x86_64.rpm
 
 ### PKGBUILD Installation
 
-To install on a Raspberry Pi running Arch Linux, asciiville-aewan must be built from sources using the Arch PKGBUILD files provided in `asciiville-aewan-pkgbuild-1.0.0-1.tar.gz`. This process can be performed on any `x86_64` or `armv7h ` architecture system running Arch Linux. An `x86_64` architecture precompiled package is supplied (see above). To rebuild this package from sources, extract `asciiville-aewan-pkgbuild-1.0.0-1.tar.gz` and use the `makepkg` command to download the sources, build the binaries, and create the installation package:
+To rebuild this package from sources on Arch Linux, extract `asciiville-aewan-pkgbuild-1.0.0-1.tar.gz` and use the `makepkg` command to download the sources, build the binaries, and create the installation package:
 
 ```
 tar xzf asciiville-aewan-pkgbuild-1.0.0-1.tar.gz
@@ -95,6 +95,6 @@ Changes in version 1.0.0 release 1 include:
 * Installation as a separate standalone package on multiple platforms
 * Integrated features and customizations from Asciiville
 * Create packaging for Arch Linux, Fedora, Ubuntu, and Raspberry Pi OS
-* Inclusion of support vector machine (SVM) models
+* Ported to Arch Linux
 
-See [Changelog](https://github.com/doctorfree/asciiville-aewan/blob/master/Changelog) for a full list of changes in every asciiville-aewan release
+See [CHANGELOG](https://github.com/doctorfree/asciiville-aewan/blob/master/CHANGELOG) for a full list of changes in every asciiville-aewan release

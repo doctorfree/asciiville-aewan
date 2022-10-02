@@ -1,3 +1,9 @@
+1.0.0r1
+
+ * Separate standalone package
+ * Integration with Asciiville project
+ * C/compiler porting changes for compilation on Arch Linux
+
 1.0.01
 
  * aecat now accepts "comment" format (which extracts metadata from the file)
