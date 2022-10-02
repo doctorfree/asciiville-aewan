@@ -1,0 +1,17 @@
+pkgbase = asciiville-aewan
+	pkgdesc = NCurses Ascii Art Editor
+	pkgver = v1.0.1r1
+	pkgrel = 1
+	url = https://github.com/doctorfree/asciiville-aewan
+	install = asciiville-aewan.install
+	arch = x86_64
+	arch = armv7h
+	license = GPL2
+	makedepends = pandoc
+	makedepends = zip
+	depends = ncurses
+	depends = zlib
+	source = asciiville-aewan::git+https://github.com/doctorfree/asciiville-aewan.git
+	sha256sums = SKIP
+
+pkgname = asciiville-aewan

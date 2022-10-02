@@ -1,0 +1,69 @@
+# Maintainer: Ronald Record <github@ronrecord.com>
+
+# Get the version and release from the VERSION file
+# Move to use of pkgver() function with something like this:
+#   git describe --long | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
+#
+pkgname=asciiville-aewan
+pkgver=v1.0.0r1
+pkgrel=1
+pkgdesc="NCurses Ascii Art Editor"
+arch=('x86_64' 'armv7h')
+url="https://github.com/doctorfree/asciiville-aewan"
+license=('GPL2')
+depends=(ncurses zlib)
+makedepends=(pandoc zip)
+install=asciiville-aewan.install
+source=("${pkgname}::git+https://github.com/doctorfree/asciiville-aewan.git#tag=${pkgver}")
+sha256sums=('SKIP')
+
+prepare() {
+  cd "${srcdir}/${pkgname}"
+}
+
+build() {
+  cd "${srcdir}/${pkgname}"
+  autoreconf -vi
+  ./configure --prefix=/usr
+  make
+  chmod +x aewan aecat aemakeflic
+}
+
+package() {
+  cd "${srcdir}/${pkgname}"
+  destdir=usr
+  for dir in "${destdir}" "${destdir}/share" \
+    "${destdir}/share/doc" \
+    "${destdir}/share/doc/${pkgname}" \
+    "${destdir}/share/man" \
+    "${destdir}/share/man/man1" \
+    "${destdir}/share/man/man5" \
+    "${destdir}/share/${pkgname}"
+  do
+    [ -d ${pkgdir}/${dir} ] || mkdir ${pkgdir}/${dir}
+  done
+
+  for dir in bin
+  do
+    [ -d ${pkgdir}/${destdir}/${dir} ] && rm -rf ${pkgdir}/${destdir}/${dir}
+  done
+
+  cp aewan aecat aemakeflic ${pkgdir}/${destdir}/bin
+  cp man/man1/*.1 ${pkgdir}/${destdir}/share/man/man1
+  cp man/man5/*.5 ${pkgdir}/${destdir}/share/man/man5
+
+  cp ACKNOWLEDGEMENTS ${pkgdir}/${destdir}/share/doc/${pkgname}
+  cp AUTHORS ${pkgdir}/${destdir}/share/doc/${pkgname}
+  cp Changelog ${pkgdir}/${destdir}/share/doc/${pkgname}
+  cp COPYING.txt ${pkgdir}/${destdir}/share/doc/${pkgname}
+  cp README.md ${pkgdir}/${destdir}/share/doc/${pkgname}
+  cp FAQ.md ${pkgdir}/${destdir}/share/doc/${pkgname}
+  cp VERSION ${pkgdir}/${destdir}/share/doc/${pkgname}
+  cp VERSION ${pkgdir}/${destdir}/share/doc/${pkgname}
+  pandoc -f gfm README.md | \
+    tee ${pkgdir}/${destdir}/share/doc/${pkgname}/README.html > /dev/null
+  gzip -9 ${pkgdir}/${destdir}/share/doc/${pkgname}/Changelog
+
+  chmod 755 ${pkgdir}/${destdir}/bin/* \
+            ${pkgdir}/${destdir}/bin
+}
