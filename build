@@ -2,13 +2,11 @@
 #
 
 usage() {
-    printf "\nUsage: ./build [-i] [-p prefix] [-u] project [project2 ...]"
+    printf "\nUsage: ./build [-i] [-p prefix] [-u]"
     printf "\nWhere:"
     printf "\n\t-i indicates install"
     printf "\n\t-p prefix specifies installation prefix (default /usr)"
     printf "\n\t-u displays this usage message and exits\n"
-    printf "\nNo arguments: build aewan, configure with prefix=/usr, build\n"
-    printf "\n'project' can be 'aewan'\n"
     exit 1
 }
 

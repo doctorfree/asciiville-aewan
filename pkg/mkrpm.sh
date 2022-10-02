@@ -34,17 +34,17 @@ OUT_DIR="dist/${PKG_NAME}_${PKG_VER}"
 cd "${SRC}/${SRC_NAME}"
 
 # Build aewan
-if [ -x scripts/build-aewan.sh ]
+if [ -x build ]
 then
-  scripts/build-aewan.sh
+  ./build
 else
-  python3 waf configure --prefix=/usr \
-                        --build-static \
-                        --with-gaia \
-                        --with-python \
-                        --with-example=streaming_extractor_music
-  python3 waf
+  [ -f aewan ] || {
+    autoreconf -vi
+    ./configure --prefix=/usr
+    make
+  }
 fi
+chmod +x aewan aecat aemakeflic
 
 ${SUDO} rm -rf dist
 mkdir dist
@@ -61,20 +61,10 @@ do
     ${SUDO} chown root:root ${OUT_DIR}/${dir}
 done
 
-for dir in bin
-do
-    [ -d ${OUT_DIR}/${DESTDIR}/${dir} ] && ${SUDO} rm -rf ${OUT_DIR}/${DESTDIR}/${dir}
-done
-
 # Install aewan
-if [ -x pkg/build-aewan.sh ]
-then
-  ${SUDO} pkg/build-aewan.sh -i -d "${SRC}/${SRC_NAME}/${OUT_DIR}"
-else
-  ${SUDO} cp aewan aecat aemakeflic ${OUT_DIR}/${DESTDIR}/bin
-  ${SUDO} cp man/man1/*.1 ${OUT_DIR}/${DESTDIR}/share/man/man1
-  ${SUDO} cp man/man5/*.5 ${OUT_DIR}/${DESTDIR}/share/man/man5
-fi
+${SUDO} cp aewan aecat aemakeflic ${OUT_DIR}/${DESTDIR}/bin
+${SUDO} cp man/man1/*.1 ${OUT_DIR}/${DESTDIR}/share/man/man1
+${SUDO} cp man/man5/*.5 ${OUT_DIR}/${DESTDIR}/share/man/man5
 
 ${SUDO} cp aewan-README ${OUT_DIR}/${DESTDIR}/share/doc/${PKG}
 ${SUDO} cp copyright ${OUT_DIR}/${DESTDIR}/share/doc/${PKG}
