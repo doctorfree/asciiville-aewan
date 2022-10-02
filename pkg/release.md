@@ -28,10 +28,10 @@ sudo apt install ./asciiville-aewan_1.0.0-1.armhf.deb
 Install the package on Arch Linux based systems by executing the command:
 
 ```bash
-sudo pacman -U ./asciiville-aewan_1.0.0-1-x86_64.pkg.tar.zst
+sudo pacman -U ./asciiville-aewan-v1.0.0r1-1-x86_64.pkg.tar.zst
 ```
 
-Install the package on RPM based systems by executing one of the following commands.
+Install the package on RPM based systems by executing the following command:
 
 On Fedora Linux:
 
@@ -78,8 +78,6 @@ asciiville-aewan can be compiled, packaged, and installed from the source code r
 git clone https://github.com/doctorfree/asciiville-aewan.git
 # Enter the asciiville-aewan source directory
 cd asciiville-aewan
-# Install the necessary build environment (not necessary on Arch Linux)
-scripts/install-dev-env.sh
 # Compile asciiville-aewan and create an installation package
 ./mkpkg
 # Install asciiville-aewan and its dependencies
