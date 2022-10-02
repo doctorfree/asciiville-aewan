@@ -1,6 +1,5 @@
 #!/bin/bash
 
 sudo rm -rf dist releases asciiville-aewan
-cd aewan
 [ -f Makefile ] && make distclean
 rm -f configure

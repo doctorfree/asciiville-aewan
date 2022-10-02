@@ -58,3 +58,16 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+dist/*
+releases/*
+tmp/*
+
+# vim files
+.*.sw[a-z]
+*.un~
+Session.vim
+.netrwhist
+
+#do not ignore .github directory
+!.github
