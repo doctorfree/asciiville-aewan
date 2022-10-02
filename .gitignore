@@ -1,3 +1,11 @@
+Makefile
+aecat
+aemakeflic
+aewan
+config.log
+config.status
+depends
+
 # Prerequisites
 *.d
 
