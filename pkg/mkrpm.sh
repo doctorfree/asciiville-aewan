@@ -33,6 +33,11 @@ OUT_DIR="dist/${PKG_NAME}_${PKG_VER}"
 
 cd "${SRC}/${SRC_NAME}"
 
+# Install required development environment tools
+PKGS="automake libtool ncurses-devel"
+${SUDO} dnf -y groupinstall "Development Tools" "Development Libraries"
+${SUDO} dnf -y install ${PKGS} pandoc zip
+
 # Build aewan
 if [ -x build ]
 then
