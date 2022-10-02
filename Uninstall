@@ -16,8 +16,7 @@ else
   [ "${ID}" == "arch" ] && arch=1
   [ "${debian}" ] || [ -f /etc/debian_version ] && debian=1
 
-  PKG=asciiville
-  [ "${debian}" ] || [ "${arch}" ] || PKG=asciiville-aewan
+  PKG=asciiville-aewan
 
   if [ "${debian}" ]
   then

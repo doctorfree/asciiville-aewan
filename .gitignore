@@ -4,6 +4,8 @@ aemakeflic
 aewan
 config.log
 config.status
+autom4te.cache/*
+configure
 depends
 
 # Prerequisites
