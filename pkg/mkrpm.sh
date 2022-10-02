@@ -52,8 +52,10 @@ mkdir dist
 [ -d ${OUT_DIR} ] && rm -rf ${OUT_DIR}
 mkdir ${OUT_DIR}
 
-for dir in "${DESTDIR}" "${DESTDIR}/share" "${DESTDIR}/share/doc" \
-           "${DESTDIR}/share/doc/${PKG}" "${DESTDIR}/share/${PKG}"
+for dir in "${DESTDIR}" "${DESTDIR}/bin" "${DESTDIR}/share" \
+           "${DESTDIR}/share/doc" "${DESTDIR}/share/doc/${PKG}" \
+           "${DESTDIR}/share/man" "${DESTDIR}/share/man/man1" \
+           "${DESTDIR}/share/man/man5" "${DESTDIR}/share/${PKG}"
 do
     [ -d ${OUT_DIR}/${dir} ] || ${SUDO} mkdir ${OUT_DIR}/${dir}
     ${SUDO} chown root:root ${OUT_DIR}/${dir}
@@ -64,30 +66,26 @@ do
     [ -d ${OUT_DIR}/${DESTDIR}/${dir} ] && ${SUDO} rm -rf ${OUT_DIR}/${DESTDIR}/${dir}
 done
 
-#${SUDO} cp aewan/build/src/examples/aewan_streaming_extractor_music \
-#           ${OUT_DIR}/${DESTDIR}/bin
-#${SUDO} cp aewan/build/src/examples/aewan_streaming_extractor_music_svm \
-#           ${OUT_DIR}/${DESTDIR}/bin
 # Install aewan
-if [ -x scripts/build-aewan.sh ]
+if [ -x pkg/build-aewan.sh ]
 then
-  ${SUDO} scripts/build-aewan.sh -i -d "${SRC}/${SRC_NAME}/${OUT_DIR}"
+  ${SUDO} pkg/build-aewan.sh -i -d "${SRC}/${SRC_NAME}/${OUT_DIR}"
 else
-  ${SUDO} python3 waf install --destdir="${SRC}/${SRC_NAME}/${OUT_DIR}"
+  ${SUDO} cp aewan aecat aemakeflic ${OUT_DIR}/${DESTDIR}/bin
+  ${SUDO} cp man/man1/*.1 ${OUT_DIR}/${DESTDIR}/share/man/man1
+  ${SUDO} cp man/man5/*.5 ${OUT_DIR}/${DESTDIR}/share/man/man5
 fi
 
-${SUDO} cp ACKNOWLEDGEMENTS ${OUT_DIR}/${DESTDIR}/share/doc/${PKG}
-${SUDO} cp AUTHORS ${OUT_DIR}/${DESTDIR}/share/doc/${PKG}
-${SUDO} cp Changelog ${OUT_DIR}/${DESTDIR}/share/doc/${PKG}
-${SUDO} cp COPYING.txt ${OUT_DIR}/${DESTDIR}/share/doc/${PKG}
+${SUDO} cp aewan-README ${OUT_DIR}/${DESTDIR}/share/doc/${PKG}
+${SUDO} cp copyright ${OUT_DIR}/${DESTDIR}/share/doc/${PKG}
+${SUDO} cp CHANGELOG ${OUT_DIR}/${DESTDIR}/share/doc/${PKG}
+${SUDO} cp COPYING ${OUT_DIR}/${DESTDIR}/share/doc/${PKG}
 ${SUDO} cp README.md ${OUT_DIR}/${DESTDIR}/share/doc/${PKG}
-${SUDO} cp "Essentia Licensing.txt" ${OUT_DIR}/${DESTDIR}/share/doc/${PKG}
-${SUDO} cp FAQ.md ${OUT_DIR}/${DESTDIR}/share/doc/${PKG}
+${SUDO} cp LICENSE ${OUT_DIR}/${DESTDIR}/share/doc/${PKG}
+${SUDO} cp TODO ${OUT_DIR}/${DESTDIR}/share/doc/${PKG}
 ${SUDO} cp VERSION ${OUT_DIR}/${DESTDIR}/share/doc/${PKG}
 ${SUDO} pandoc -f gfm README.md | ${SUDO} tee ${OUT_DIR}/${DESTDIR}/share/doc/${PKG}/README.html > /dev/null
-${SUDO} gzip -9 ${OUT_DIR}/${DESTDIR}/share/doc/${PKG}/Changelog
-
-${SUDO} cp -a share/svm_models ${OUT_DIR}/${DESTDIR}/share/${PKG}/svm_models
+${SUDO} gzip -9 ${OUT_DIR}/${DESTDIR}/share/doc/${PKG}/CHANGELOG
 
 ${SUDO} chmod 755 ${OUT_DIR}/${DESTDIR}/bin/* ${OUT_DIR}/${DESTDIR}/bin
 ${SUDO} chown -R root:root ${OUT_DIR}/${DESTDIR}

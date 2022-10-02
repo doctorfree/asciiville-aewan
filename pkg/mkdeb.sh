@@ -80,9 +80,9 @@ Description: Aewan is a curses-based program for the creation and editing of asc
 
 chmod 644 ${OUT_DIR}/DEBIAN/control
 
-for dir in "${DESTDIR}" "${DESTDIR}/share" "${DESTDIR}/share/doc" \
-           "${DESTDIR}/share/man" "${DESTDIR}/share/man/man1" \
-           "${DESTDIR}/share/man/man5" \
+for dir in "${DESTDIR}" "${DESTDIR}/bin" "${DESTDIR}/share" \
+           "${DESTDIR}/share/doc" "${DESTDIR}/share/man" \
+           "${DESTDIR}/share/man/man1" "${DESTDIR}/share/man/man5" \
            "${DESTDIR}/share/doc/${PKG}" "${DESTDIR}/share/${PKG}"
 do
     [ -d ${OUT_DIR}/${dir} ] || ${SUDO} mkdir ${OUT_DIR}/${dir}
