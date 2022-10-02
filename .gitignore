@@ -60,6 +60,9 @@ Mkfile.old
 dkms.conf
 
 dist/*
+pkg/dist/arch/*
+pkg/dist/fedora/*
+pkg/dist/rpi/*
 releases/*
 tmp/*
 
