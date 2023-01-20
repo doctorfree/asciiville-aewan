@@ -1,4 +1,5 @@
 #include "debug_aewl.h"
+#include "filedlg.h"
 
 #include "aewl/aewl.h"
 #include "aewl/form.h"

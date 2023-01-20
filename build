@@ -11,7 +11,13 @@ usage() {
 }
 
 INSTALL=
-PREFIX=/usr
+platform=`uname -s`
+if [ "${platform}" == "Darwin" ]
+then
+  PREFIX="/usr/local"
+else
+  PREFIX="/usr"
+fi
 while getopts "ip:u" flag; do
     case $flag in
         i)
